@@ -128,9 +128,7 @@
     width: 100%;
     display: flex;
     min-height: 0;
-  }
-  .categories .categories-card .card-item .categories {
-    overflow: hidden;
+    overflow: auto;
   }
 }
 /* iPads (portrait and landscape) ----------- */
