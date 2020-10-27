@@ -307,7 +307,50 @@
 <p><a target="_blank" rel="noopener" href="http://markmiyashita.com/cs61a/environment_diagrams/">http://markmiyashita.com/cs61a/environment_diagrams/</a></p>
 <p><a target="_blank" rel="noopener" href="https://berkeley-cs61as.github.io/textbook/how-to-draw-environment-diagrams.html">https://berkeley-cs61as.github.io/textbook/how-to-draw-environment-diagrams.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs61a/su10/resources/Joshua%20Cantrell%20Notes/8-EnvDiagrams.pdf">https://inst.eecs.berkeley.edu/~cs61a/su10/resources/Joshua%20Cantrell%20Notes/8-EnvDiagrams.pdf</a></p>
-<h3 id="Defining-Functions"><a href="#Defining-Functions" class="headerlink" title="Defining Functions"></a><strong>Defining Functions</strong></h3>
+<h3 id="Defining-Functions"><a href="#Defining-Functions" class="headerlink" title="Defining Functions"></a><strong>Defining Functions</strong></h3><p>Assignment is a simple means of abstraction: binds names to values.</p>
+<p>Function definition is a more powerful means of abstraction: binds names to expressions.</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def &lt;name&gt;(&lt;formal parameters&gt;):</span><br><span class="line">    return &lt;return expression&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Function <em>signature</em> indicates how many arguments a function takes.</p>
+<p>Function <em>body</em> defines the computation performed when the function is applied.</p>
+<p>Execution procedure for def statements:</p>
+<ol>
+<li>Create a function with signature &lt;name&gt;(&lt;formal parameters&gt;)</li>
+<li>Set the body of that function to be everything indented after the first line</li>
+<li>Bind &lt;name&gt; to that function in the current frame</li>
+</ol>
+<h3 id="Calling-User-Defined-Functions"><a href="#Calling-User-Defined-Functions" class="headerlink" title="Calling User-Defined Functions"></a>Calling User-Defined Functions</h3><p>Procedure for calling/applying user-defined functions (version 1):</p>
+<ol>
+<li>Add a local frame, forming a new environment</li>
+<li>Bind the function’s formal parameters to its arguments in that frame</li>
+<li>Execute the body of the function in that new environment</li>
+</ol>
+<blockquote>
+<p>A function’s signature has all the information needed to create a local frame.</p>
+</blockquote>
+<h3 id="Looking-Up-Names-in-Environments"><a href="#Looking-Up-Names-in-Environments" class="headerlink" title="Looking Up Names in Environments"></a>Looking Up Names in Environments</h3><p>Every expression is evaluated in the context of an environment.</p>
+<p>So far, the current environment is either:</p>
+<ul>
+<li><p>The global frame alone, or</p>
+</li>
+<li><p>A local frame, followed by a global frame.</p>
+</li>
+</ul>
+<blockquote>
+<p><strong><em>Most important two things I’ll say all day:</em></strong></p>
+<ol>
+<li><p>An environment is a series of frames.</p>
+</li>
+<li><p>A name evaluates to the value bound to that name in the earliest frame of the current<br>environment in which that name is found.</p>
+</li>
+</ol>
+</blockquote>
+<p>E.g., to look up some name in the body of the square function:</p>
+<ul>
+<li>Look for that name in the local frame.</li>
+<li>If not found, look for it in the global frame.<br>(Built-in names like “max” are in the global frame too,<br>but we don’t draw them in environment diagrams.)</li>
+</ul>
+
         </div>
 
         
