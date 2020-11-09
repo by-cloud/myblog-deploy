@@ -46,6 +46,45 @@
     
     
         
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
     
 
 
@@ -188,7 +227,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">October 23, 2020&nbsp;&nbsp;5:39:17</a>
+                        Date: <a href="#">October 23, 2020&nbsp;&nbsp;05:39:17</a>
                         </span>
                     
                     
@@ -319,7 +358,7 @@
 <li>Set the body of that function to be everything indented after the first line</li>
 <li>Bind &lt;name&gt; to that function in the current frame</li>
 </ol>
-<h3 id="Calling-User-Defined-Functions"><a href="#Calling-User-Defined-Functions" class="headerlink" title="Calling User-Defined Functions"></a>Calling User-Defined Functions</h3><p>Procedure for calling/applying user-defined functions (version 1):</p>
+<h3 id="Calling-User-Defined-Functions"><a href="#Calling-User-Defined-Functions" class="headerlink" title="Calling User-Defined Functions"></a><strong>Calling User-Defined Functions</strong></h3><p>Procedure for calling/applying user-defined functions (version 1):</p>
 <ol>
 <li>Add a local frame, forming a new environment</li>
 <li>Bind the function’s formal parameters to its arguments in that frame</li>
@@ -328,7 +367,7 @@
 <blockquote>
 <p>A function’s signature has all the information needed to create a local frame.</p>
 </blockquote>
-<h3 id="Looking-Up-Names-in-Environments"><a href="#Looking-Up-Names-in-Environments" class="headerlink" title="Looking Up Names in Environments"></a>Looking Up Names in Environments</h3><p>Every expression is evaluated in the context of an environment.</p>
+<h3 id="Looking-Up-Names-in-Environments"><a href="#Looking-Up-Names-in-Environments" class="headerlink" title="Looking Up Names in Environments"></a><strong>Looking Up Names in Environments</strong></h3><p>Every expression is evaluated in the context of an environment.</p>
 <p>So far, the current environment is either:</p>
 <ul>
 <li><p>The global frame alone, or</p>
@@ -350,6 +389,33 @@
 <li>Look for that name in the local frame.</li>
 <li>If not found, look for it in the global frame.<br>(Built-in names like “max” are in the global frame too,<br>but we don’t draw them in environment diagrams.)</li>
 </ul>
+<h2 id="Related-Resources"><a href="#Related-Resources" class="headerlink" title="Related Resources"></a>Related Resources</h2><h3 id="Jennifer’s-Environment-Diagram-Cheat-Sheet"><a href="#Jennifer’s-Environment-Diagram-Cheat-Sheet" class="headerlink" title="Jennifer’s Environment Diagram Cheat Sheet"></a><a target="_blank" rel="noopener" href="https://github.com/by-cloud/cs61a_fall2020/blob/master/resources/week2/Jennifer's%20Environment%20Diagram%20Cheat%20Sheet.pdf">Jennifer’s Environment Diagram Cheat Sheet</a></h3><h4 id="Lambda-Functions"><a href="#Lambda-Functions" class="headerlink" title="Lambda Functions"></a>Lambda Functions</h4><p><code>lambda x, y: x + y</code></p>
+<p>Variables before colon are parameters; expression after colon is return value.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">lambda</span> :<span class="number">10</span></span><br><span class="line">Function</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="keyword">lambda</span> :<span class="number">10</span>)()</span><br><span class="line"><span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">lambda</span> x, y: x + y</span><br><span class="line">Function</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="keyword">lambda</span> x, y: x + y)(<span class="number">2</span> + <span class="number">3</span>)</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Environment-Diagram-when-Calling-Recursive-Functions"><a href="#Environment-Diagram-when-Calling-Recursive-Functions" class="headerlink" title="Environment Diagram when Calling Recursive Functions"></a>Environment Diagram when Calling Recursive Functions</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">if</span> x == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> f(x - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ python3</span><br><span class="line">Python 3.7.3 (v3.7.3:ef4ec6ed12, Mar 25 2019, 16:52:21)</span><br><span class="line">[Clang 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; def f(x):</span><br><span class="line">...     if x == 0:</span><br><span class="line">...         return 0</span><br><span class="line">...     else:</span><br><span class="line">...         return f(x - 1)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; f(4)</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; f(3)</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Global frame<br>f $\rightarrow$ func f(x) [parent=Global]</p>
+<blockquote>
+<p>f1: f [parent=Global]<br>x | 3<br>Return Value | eval(f(x - 1))</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>f2: f [parent=Global]<br>x | 2<br>Return Value | eval(f(x - 1))</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>f3: f [parent=Global]<br>x | 1<br>Return Value | eval(f(x - 1))</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>f4: f [parent=Global]<br>x | 0<br>Return Value | 0</p>
+</blockquote>
+</blockquote>
+<h3 id="Welcome-to-Computer-Science-by-Sequoia"><a href="#Welcome-to-Computer-Science-by-Sequoia" class="headerlink" title="Welcome to Computer Science by Sequoia"></a><a target="_blank" rel="noopener" href="https://sequoiatree.github.io/welcome-to-computer-science.html">Welcome to Computer Science by Sequoia</a></h3><p>This essay is important, I copy it as a new post so that I will never lost it.</p>
 
         </div>
 
@@ -385,7 +451,7 @@
                     
                         <a href="/tags/cs61a/"># cs61a</a>
                     
-                        <a href="/tags/Note/"># Note</a>
+                        <a href="/tags/Notes/"># Notes</a>
                     
                         
                 </span>
@@ -398,7 +464,7 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/10/25/How-to-write-a-good-paper/">How to write a good review</a>
+                <a class="prev" rel="prev" href="/2020/10/25/How-to-write-a-good-paper/">How to write a good review(to be finished)</a>
             
             
             <a class="next" rel="next" href="/2020/10/23/CS61A-Week1-Wed-8-26-Computer-Science/">CS61A Week1 Wed 8/26: Computer Science</a>
